@@ -122,3 +122,31 @@ my_list = [34, 82.6, "Darth Vader", 17, "Hannibal"]
 len_my_list = len(my_list)
 my_tuple_from_my_list = (my_list[0],my_list[4],len_my_list)
 print(my_tuple_from_my_list)
+#Dynamic
+my_tuple = (my_list[0], my_list[len(my_list) - 1], len(my_list))
+print(my_tuple)
+
+test_list = [40, 35, 82, 14, 22, 66, 53]
+k=2
+# sorted_list = sorted(test_list)
+# kth_max = sorted_list[-k]
+# print(kth_max)
+
+# test_list.sort(reverse=True)
+# print(test_list)
+# kth_max_desc = test_list[k-1]
+# print(kth_max_desc)
+
+test_list.sort()
+kth_max = test_list[-k]
+print(kth_max)
+
+def count_low_high(num_list):
+    if (len(num_list)==0):
+        return None
+    high_list = list(filter(lambda n: n > 50 or n % 3 == 0, num_list))
+    low_list = list(filter(lambda n: n <= 50 and not n % 3 ==0, num_list))
+    return[len(low_list), len(high_list)]
+
+num_list = [20, 9, 51, 81, 50, 42, 77]
+print(count_low_high(num_list))
