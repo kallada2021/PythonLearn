@@ -1,0 +1,68 @@
+// Below is a JSON control file template for orchestrating S3 object copies. This file defines source/destination paths, metadata, and optional parameters (e.g., Object Lock, storage class, ACLs). It can be used by a script or tool (like AWS CLI, SDK, or custom code) to execute the copy operations.
+{
+    "version": "1.0",
+    "description": "S3 Object Copy Control File",
+    "jobs": [
+      {
+        "source": {
+          "type": "local",
+          "path": "github/data/files/report.pdf"
+        },
+        "destination": {
+          "bucket": "my-target-bucket",
+          "key": "reports/2023/report.pdf",
+          "region": "us-east-1"
+        },
+        "options": {
+          "overwrite": true,
+          "acl": "private",
+          "storageClass": "STANDARD",
+          "metadata": {
+            "author": "team-alpha",
+            "project": "project-x"
+          },
+          "objectLock": {
+            "mode": "GOVERNANCE",
+            "retainUntil": "2025-12-31T00:00:00Z",
+            "legalHold": false
+          },
+          "checksum": {
+            "verify": true,
+            "algorithm": "MD5"
+          }
+        },
+        "errorHandling": {
+          "retry": {
+            "maxAttempts": 3,
+            "backoffMultiplier": 2
+          },
+          "onFailure": "continue"
+        }
+      },
+      {
+        "source": {
+          "type": "s3",
+          "bucket": "my-source-bucket",
+          "key": "github/archives/old-report.pdf",
+          "region": "us-west-2"
+        },
+        "destination": {
+          "bucket": "my-target-bucket",
+          "key": "archives/legacy/old-report.pdf",
+          "region": "us-east-1"
+        },
+        "options": {
+          "overwrite": false,
+          "storageClass": "GLACIER"
+        }
+      }
+    ],
+    "globalOptions": {
+      "dryRun": false,
+      "logLevel": "verbose",
+      "notification": {
+        "successWebhook": "https://hooks.example.com/s3-copy-success",
+        "failureWebhook": "https://hooks.example.com/s3-copy-failure"
+      }
+    }
+  }
