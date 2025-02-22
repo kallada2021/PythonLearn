@@ -1,5 +1,5 @@
 # Run: python s3_copy_job_runner.py path/to/your/control_file.json
-
+# Here's a Python script that reads the JSON control file and executes the S3 copy operations using the boto3 AWS SDK:
 import json
 import os
 import time
