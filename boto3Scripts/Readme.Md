@@ -36,3 +36,28 @@ Copies an object between buckets across regions.
 Transitions the storage class to Glacier.
 
 Skips if the destination object already exists ("overwrite": false).
+
+Ctr1.json file explained
+Explanation of the Template:
+Top-Level Structure:
+"copy_operations": An array of individual copy tasks.
+"global_settings": Optional settings applied to all operations (e.g., dry run, concurrency limits).
+Copy Operation Fields:
+"source": Defines the S3 bucket, key (path), and optional version ID of the object to copy.
+"destination": Specifies the target bucket and key.
+"metadata": Controls metadata handling:
+"user-defined": Custom key-value pairs.
+"directive": COPY reuses source metadata; REPLACE applies new metadata.
+"optional_parameters": Configures additional S3 features:
+"storage_class": Sets the storage tier (e.g., STANDARD, GLACIER).
+"acl": Applies an access control policy.
+"object_lock": Configures Object Lock for compliance/governance.
+"tagging": Adds key-value tags.
+"encryption": Specifies server-side encryption type.
+"content_type": Overrides the MIME type.
+"cache_control": Sets caching headers.
+Global Settings:
+"dry_run": Simulates operations for testing.
+"overwrite": Controls whether to replace existing objects.
+"max_concurrent_copies": Limits parallelism for resource management.
+"retry_attempts" and "retry_delay_seconds": Handles transient failures.

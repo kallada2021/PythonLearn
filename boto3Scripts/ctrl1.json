@@ -1,0 +1,75 @@
+{
+    "copy_operations": [
+      {
+        "source": {
+          "bucket": "my-source-bucket",
+          "key": "path/to/source/file.txt",
+          "version_id": "optional_version_id"  // Optional: specify if copying a specific version
+        },
+        "destination": {
+          "bucket": "my-destination-bucket",
+          "key": "path/to/destination/file.txt"
+        },
+        "metadata": {
+          "user-defined": {
+            "project": "data-migration-2025",
+            "owner": "team-alpha"
+          },
+          "directive": "COPY"  // Options: COPY (keep source metadata), REPLACE (use new metadata)
+        },
+        "optional_parameters": {
+          "storage_class": "STANDARD",  // Options: STANDARD, GLACIER, DEEP_ARCHIVE, etc.
+          "acl": "private",  // Options: private, public-read, bucket-owner-full-control, etc.
+          "object_lock": {
+            "mode": "GOVERNANCE",  // Options: GOVERNANCE, COMPLIANCE
+            "retain_until_date": "2026-02-22T00:00:00Z",
+            "legal_hold": "ON"  // Options: ON, OFF
+          },
+          "tagging": [
+            {
+              "key": "environment",
+              "value": "production"
+            },
+            {
+              "key": "priority",
+              "value": "high"
+            }
+          ],
+          "encryption": {
+            "type": "SSE-S3"  // Options: SSE-S3, SSE-KMS, SSE-C
+            // For SSE-KMS: add "kms_key_id": "alias/my-key"
+            // For SSE-C: script/tool would need to handle key separately
+          },
+          "content_type": "text/plain",  // Optional: override detected content type
+          "cache_control": "max-age=3600"  // Optional: caching behavior
+        }
+      },
+      {
+        "source": {
+          "bucket": "my-source-bucket",
+          "key": "documents/report.pdf"
+        },
+        "destination": {
+          "bucket": "my-destination-bucket",
+          "key": "archive/report-2025.pdf"
+        },
+        "metadata": {
+          "user-defined": {
+            "archive_date": "2025-02-22"
+          },
+          "directive": "REPLACE"
+        },
+        "optional_parameters": {
+          "storage_class": "GLACIER",
+          "acl": "bucket-owner-full-control"
+        }
+      }
+    ],
+    "global_settings": {
+      "dry_run": false,  // If true, simulate copy without executing
+      "overwrite": false,  // If true, overwrite existing objects at destination
+      "max_concurrent_copies": 10,  // Limit parallel operations
+      "retry_attempts": 3,  // Retry failed copies
+      "retry_delay_seconds": 5  // Delay between retries
+    }
+  }
