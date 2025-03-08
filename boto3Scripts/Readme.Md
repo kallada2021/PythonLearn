@@ -61,3 +61,25 @@ Global Settings:
 "overwrite": Controls whether to replace existing objects.
 "max_concurrent_copies": Limits parallelism for resource management.
 "retry_attempts" and "retry_delay_seconds": Handles transient failures.
+
+PreAuthTriggerLambda for Cognito
+How to Use This Lambda Trigger
+
+Deploy this Lambda function to your AWS account with the appropriate IAM permissions.
+Configure the function as a Cognito Pre-Authentication trigger in your AWS Cognito User Pool.
+Ensure your user attributes include a custom attribute named custom:cognito_role that stores the expected role for each user.
+
+This function works by:
+
+Extracting user attributes from the Cognito event data
+Getting the role information from the rules mapping (in this example via clientId - you may need to adjust this based on how your role information is being passed)
+Comparing the mapped role with the custom role attribute stored in the user's profile
+Either allowing the authentication to proceed if the roles match, or throwing an exception to deny authentication if they don't match
+
+You can extend this code to perform additional preparatory actions before authentication, such as:
+
+Logging authentication attempts
+Checking user status in other systems
+Updating user metadata
+Implementing custom rate limiting
+Validating additional attributes
