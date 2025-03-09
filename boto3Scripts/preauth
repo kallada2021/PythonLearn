@@ -88,3 +88,27 @@ def get_mapped_role_for_client(client_id):
         logger.warning(f"No role mapping found for client ID: {client_id}")
         
     return mapped_role
+EXample Event
+{
+  "version": "1",
+  "region": "us-east-1",
+  "userPoolId": "us-east-1_aBcDeFgHi",
+  "userName": "test-user",
+  "callerContext": {
+    "awsSdkVersion": "aws-sdk-js-2.6.4",
+    "clientId": "1abc2defghijklmnopqrstuv3"
+  },
+  "triggerSource": "PreAuthentication_Authentication",
+  "request": {
+    "userAttributes": {
+      "sub": "11111111-2222-3333-4444-555555555555",
+      "email_verified": "true",
+      "custom:cognito_role": "admin",
+      "phone_number_verified": "true",
+      "phone_number": "+12065551234",
+      "email": "user@example.com"
+    },
+    "userNotFound": false
+  },
+  "response": {}
+}
