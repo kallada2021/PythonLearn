@@ -83,3 +83,38 @@ Checking user status in other systems
 Updating user metadata
 Implementing custom rate limiting
 Validating additional attributes
+
+UnitTests for preauth.py
+Key Improvements in the Pytest Version:
+
+Fixtures - Used pytest fixtures for test setup, making the tests more concise and reusable:
+
+base_event fixture provides a standard event structure that can be modified in each test
+disable_logging fixture automatically applies to all tests
+
+
+Simplified Assertions - Using pytest's native assert statements instead of unittest's assertion methods
+Less Boilerplate - No need for test classes or special main block
+Parameterization Potential - Though not implemented here, pytest makes it easy to parameterize tests
+Added Tests - Included additional tests to improve coverage:
+
+Test for exception handling during role retrieval
+Test for handling null events
+
+
+
+How to Run These Tests:
+
+Install pytest if you haven't already:
+Copypip install pytest
+
+Run the tests (assuming you saved the file as test_lambda_function.py):
+Copypytest test_lambda_function.py -v
+
+For a coverage report:
+Copypip install pytest-cov
+pytest test_lambda_function.py --cov=lambda_function -v
+
+
+The -v flag provides verbose output so you can see which tests are running and passing.
+These pytest tests accomplish the same comprehensive testing as the unittest version but with cleaner, more maintainable code. The fixture pattern in particular makes it easy to set up standard test data and modify only what's needed for each specific test case.
