@@ -1,0 +1,46 @@
+cd /UserManagement/Application/ && uvicorn main:app --host=0.0.0.0 --reload
+uvicorn main:app --reload
+Migrations
+Use a Migration Tool (Recommended for Production)
+For a production environment or if you want to preserve existing data, use a migration tool like Alembic.
+
+Install Alembic: Install Alembic in your virtual environment:
+pip install alembic
+
+Initialize Alembic: Run the following command to initialize Alembic in your project:
+alembic init migrations
+
+Configure Alembic: Edit the alembic.ini file and set the sqlalchemy.url to your database URL:
+sqlalchemy.url = sqlite:///sql_app.db
+
+Generate a Migration Script: Run the following command to generate a migration script:
+alembic revision --autogenerate -m "Add username column to users table"
+
+Apply the Migration: Apply the migration to update the database schema:
+alembic upgrade head
+
+
+cd /workspaces/PythonLearn/UserManagement/Application
+alembic -c migrations/alembic.ini revision --autogenerate -m "Add username column to users table"
+alembic -c migrations/alembic.ini upgrade head
+
+Test - User Retreival by Id
+You can test the users/{user_id} endpoint using tools like Postman, cURL, or FastAPI's Swagger UI (/docs).
+curl -X GET "http://127.0.0.1:8000/users/1" -H "Content-Type: application/json"
+
+Evt -  User exists
+{
+  "id": 1,
+  "email": "testuser4@test.com",
+  "username": "testuser4",
+  "first_name": "Test",
+  "last_name": "User",
+  "gender": "male",
+  "country": "USA",
+  "is_active": true
+}
+
+User does not exist
+{
+  "detail": "User not found"
+}
