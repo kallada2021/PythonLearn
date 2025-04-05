@@ -1,0 +1,9 @@
+docker ps
+Note the CONTAINER ID or NAMES of your MySQL container (e.g., mysql-container).
+docker exec -it flight_reservation_db_container bash
+mysql -u admin -p
+USE flight;
+SHOW TABLES;
+DESCRIBE FlightReservation;
+SELECT * FROM <table_name>;
+
