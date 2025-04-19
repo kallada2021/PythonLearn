@@ -1,4 +1,6 @@
+Activate virtual env - source myvenv/bin/activate
 docker ps
+docker compose up
 Note the CONTAINER ID or NAMES of your MySQL container (e.g., mysql-container).
 docker exec -it flight_reservation_db_container bash
 mysql -u admin -p
