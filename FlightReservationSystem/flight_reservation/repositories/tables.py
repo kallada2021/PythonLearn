@@ -63,7 +63,7 @@ CREATE TABLE Account (
     status VARCHAR(255)
 )
 """)
-# Create Account_Role table for many-to-many relationship between Account and Role
+# Create the Account_Role table for many-to-many relationship between Account and Role
 mycursor.execute("""
 CREATE TABLE Account_Role (
     account_id INT,
@@ -74,7 +74,7 @@ CREATE TABLE Account_Role (
 )
 """)
 
-# Create flight table
+# Create flight table and columns
 mycursor.execute("""
 CREATE TABLE Flight (
     flight_no INT AUTO_INCREMENT PRIMARY KEY,
