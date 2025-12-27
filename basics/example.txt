@@ -1,0 +1,3 @@
+This is a sample text.I am learning Python exception handling.
+
+I am learning to use try-except-finally.
